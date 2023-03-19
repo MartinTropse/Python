@@ -11,15 +11,13 @@ import netCDF4
 import numpy as np
 import pandas as pd
 
-os.chdir("C:/Calluna/Projekt/CementaSlite/Copernicus_BaltFys")
+os.chdir("C:/Calluna/Projekt/CementaSlite/Copernicus_BaltFys/Hourly_BGC_003_007")
 os.listdir()
 
-file_in=netCDF4.Dataset('dataset-bal-analysis-forecast-phy-dailymeans_1657797649987.nc', "r", format="NETCDF4")
+file_in=netCDF4.Dataset('dataset-bal-analysis-forecast-bio-hourly_1658318540933.nc', "r", format="NETCDF4")
 
 tname = "time"
-
 nctime = file_in.variables[tname][:]
-
 t_unit = file_in.variables[tname].units
 
 try :
@@ -37,4 +35,4 @@ datevar = []
 datevar.append(netCDF4.num2date(nctime,units = t_unit,calendar = t_cal))
 
 df = pd.DataFrame.from_records(datevar)
-df.to_csv("phyDaily_dates.csv", sep = ',', encoding = "UTF-8")
+df.to_csv("bgcHourly_dates.csv", sep = ',', encoding = "UTF-8")
